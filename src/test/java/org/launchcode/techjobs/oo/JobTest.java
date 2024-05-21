@@ -36,4 +36,44 @@ public class JobTest {
         assertEquals(false, job1.equals(job2));
     }
 
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job job = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        assertTrue("String stars with a new line", job.toString().startsWith(System.lineSeparator()));
+        assertTrue("String ends with a new line", job.toString().endsWith(System.lineSeparator()));
+    }
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job job = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String expectedJobString = System.lineSeparator()
+                + "ID: " + job.getId()
+                + "\nName: " + "Product tester"
+                + "\nEmployer: " + "ACME"
+                + "\nLocation: " + "Desert"
+                + "\nPosition Type: " + "Quality control"
+                + "\nCore Competency: " + "Persistence"
+                + System.lineSeparator();
+        assertEquals(expectedJobString, job.toString());
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job job = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency(""));
+        String expectedJobString = System.lineSeparator()
+                + "ID: " + job.getId()
+                + "\nName: " + "Product tester"
+                + "\nEmployer: " + "ACME"
+                + "\nLocation: " + "Desert"
+                + "\nPosition Type: " + "Quality control"
+                + "\nCore Competency: " + "Data not available"
+                + System.lineSeparator();
+        assertEquals(expectedJobString, job.toString());
+    }
+
+    @Test
+    public void testToStringHandlesIdOnly() {
+        Job job = new Job();
+        assertEquals("OOPS! This job does not seem to exist.", job.toString());
+    }
+
 }

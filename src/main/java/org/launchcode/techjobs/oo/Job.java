@@ -2,6 +2,8 @@ package org.launchcode.techjobs.oo;
 
 import java.util.Objects;
 
+import static java.util.Objects.isNull;
+
 public class Job {
 
     private int id;
@@ -95,6 +97,20 @@ public class Job {
     }
 
 
-
+    // Adding TDD Step -
+    @Override
+    public String toString() {
+        if (!isNull(getId()) && getName() == null && getEmployer() == null && getLocation() ==null && getPositionType()== null && getCoreCompetency() == null) {
+            return "OOPS! This job does not seem to exist.";
+        }
+        return System.lineSeparator()
+                + "ID: " + getId()
+                + "\nName: " + (getName().isEmpty() ? "Data not available" : getName())
+                + "\nEmployer: " + (getEmployer().getValue().isEmpty() ? "Data not available" : getEmployer())
+                + "\nLocation: " + (getLocation().getValue().isEmpty() ? "Data not available" : getLocation())
+                + "\nPosition Type: " + (getPositionType().getValue().isEmpty() ? "Data not available" : getPositionType())
+                + "\nCore Competency: " + (getCoreCompetency().getValue().isEmpty() ? "Data not available" : getCoreCompetency())
+                + System.lineSeparator();
+    }
 
 }
